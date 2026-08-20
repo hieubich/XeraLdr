@@ -1,0 +1,29 @@
+name: Build C Project (MSBuild)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Compile C Project
+        run: |
+          msbuild /p:Configuration=Release /p:Platform=x64
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: c-program-x64
+          path: |
+            **/x64/Release/*.exe
+            **/Release/*.exe
